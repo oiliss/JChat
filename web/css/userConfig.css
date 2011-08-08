@@ -1,0 +1,25 @@
+/* 
+    Document   : userConfig
+    Created on : 29.07.2011, 9:31:50
+    Author     : vernet
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+/* 
+   TODO customize this sample style
+   Syntax recommendation http://www.w3.org/TR/REC-CSS2/
+*/
+
+root { 
+	display: block;
+}
+.user_config_table, .user_config_table td {	 
+	border-collapse: collapse;
+	border-style: solid;
+	border-color: lightgray;
+	border-width: 1px;
+	text-align: left;
+	vertical-align: top;
+}
+

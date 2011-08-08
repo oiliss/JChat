@@ -1,0 +1,39 @@
+/*
+    Document   : index
+    Created on : 27.07.2011, 9:28:37
+    Author     : vernet
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+/*
+   TODO customize this sample style
+   Syntax recommendation http://www.w3.org/TR/REC-CSS2/
+*/
+
+root {
+	display: block;
+}
+
+.table_of_messages, .table_of_messages td {	 
+	border-collapse: collapse;
+	border-style: solid;
+	border-color: lightgray;
+	border-width: 1px;
+	text-align: left;
+	vertical-align: top;
+}
+.message_one {
+	background-color: #f8f8f8;
+}
+.message_two {
+}
+.message_date {
+}
+.message_user_name {
+	font-style: italic;
+}
+.message_user_avatar{	
+}
+.message_text {
+}
