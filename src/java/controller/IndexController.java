@@ -27,22 +27,25 @@ public class IndexController extends AbstractController {
 	protected ModelAndView handleRequestInternal(HttpServletRequest hsr, HttpServletResponse hsr1) throws Exception {
 		SessionService.setSessionUserId(hsr);
 		String text = hsr.getParameter("text");
+		Long userId = SessionService.getSessionUserId(hsr);
 		if (text != null) {
-			Long userId = SessionService.getSessionUserId(hsr);
-			indexService.addMessage(userId, text);
+			if (!text.isEmpty()) {
+				indexService.addMessage(userId, text);
+			}
 		}
 		String allMessagesReaded = hsr.getParameter("allMessagesReaded");
 		if (allMessagesReaded != null) {
 			String strLastMessageId = SessionService.get(hsr, "lastMessageId");
 			if (strLastMessageId != null) {
 				Long lastMessageId = Long.parseLong(strLastMessageId);
-				Long userId = SessionService.getSessionUserId(hsr);
 				indexService.changeShownDate(userId, lastMessageId);
 			}
 		}
 		SessionService.set(hsr, "lastMessageId", "" + indexService.getLastMessageId());
 		ModelAndView mv = new ModelAndView("indexView");
 		//mv.addObject("session_content", SessionService.content(hsr));
+		mv.addObject("last_readed_message_id",
+						indexService.getLastReadedMessageId(userId));
 		mv.addObject("new_messages",
 						indexService.messageList(SessionService.getSessionUserId(hsr)));
 		//mv.addObject("message", new controller.entity.Mess());

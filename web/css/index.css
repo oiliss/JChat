@@ -23,6 +23,9 @@ root {
 	text-align: left;
 	vertical-align: top;
 }
+.new_message {
+	background-color: #ffffdd;
+}
 .message_one {
 	background-color: #f8f8f8;
 }

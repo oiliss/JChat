@@ -5,12 +5,14 @@
 package hibernate;
 
 import db_objects.Message;
+import db_objects.User;
 import java.util.Date;
 import java.util.List;
 import org.hibernate.*;
 import org.hibernate.Session;
 import org.hibernate.criterion.Expression;
 import org.hibernate.criterion.Order;
+import org.hibernate.criterion.Restrictions;
 
 /**
  *
@@ -86,6 +88,48 @@ public class MessageHelper {
 			System.err.println(javaoinlibrary.ErrUtils.getStack(new Throwable(), e));
 		}
 		return messageCount;
+	}
+
+	public Long getLastReadedMessageId(Date date) {
+		checkSession();
+		org.hibernate.Transaction tx = null;
+		List<Message> messageList = null;
+		Long id = 0L;
+		try {
+			tx = session.beginTransaction();
+			messageList = (List<Message>) session.createCriteria(Message.class).
+							add(Expression.le("date", date)).
+							addOrder(Order.desc("id")).list();
+			id = messageList.get(0).getId();
+			tx.commit();
+		} catch (Exception e) {
+			if (tx != null) {
+				tx.rollback();
+			}
+			System.err.println(javaoinlibrary.ErrUtils.getStack(new Throwable(), e));
+		}
+		return id;
+	}
+
+	public String getLastUserMessage(User user) {
+		checkSession();
+		org.hibernate.Transaction tx = null;
+		List<Message> messageList = null;
+		String text = "";
+		try {
+			tx = session.beginTransaction();
+			messageList = (List<Message>) session.createCriteria(Message.class).
+							add(Restrictions.eq("user", user)).
+							addOrder(Order.desc("id")).list();
+			text = messageList.get(0).getText();
+			tx.commit();
+		} catch (Exception e) {
+			if (tx != null) {
+				tx.rollback();
+			}
+			System.err.println(javaoinlibrary.ErrUtils.getStack(new Throwable(), e));
+		}
+		return text;
 	}
 
 	public List<Message> getMessagePage(int start, int count) {

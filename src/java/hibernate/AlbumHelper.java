@@ -51,7 +51,7 @@ public class AlbumHelper {
 		return albumList;
 	}
 
-	public List<Album> getAlbumList(Long userId) {
+	public List<Album> getAlbumList(User user) {
 		checkSession();
 		org.hibernate.Transaction tx = null;
 		List<Album> albumList = null;
@@ -60,7 +60,7 @@ public class AlbumHelper {
 			//Query q = session.createQuery("from Message as message");
 			//messageList = (List<Message>) q.list();
 			albumList = (List<Album>) session.createCriteria(Album.class).
-							add(Restrictions.eq("user_id", userId)).list();
+							add(Restrictions.eq("user", user)).list();
 			for (Album album : albumList) {
 				Hibernate.initialize(album.getUser());
 			}

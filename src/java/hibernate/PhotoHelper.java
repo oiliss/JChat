@@ -53,7 +53,7 @@ public class PhotoHelper {
 		return photoList;
 	}
 	
-	public List<Photo> getPhotoList(Long albumId) {
+	public List<Photo> getPhotoList(Album album) {
 		checkSession();
 		org.hibernate.Transaction tx = null;
 		List<Photo> photoList = null;
@@ -62,7 +62,7 @@ public class PhotoHelper {
 			//Query q = session.createQuery("from Message as message");
 			//messageList = (List<Message>) q.list();
 			photoList = (List<Photo>) session.createCriteria(Photo.class).
-							add(Restrictions.eq("album_id", albumId)).list();
+							add(Restrictions.eq("album", album)).list();
 			for (Photo photo : photoList) {
 				Hibernate.initialize(photo.getAlbum());
 				Hibernate.initialize(photo.getAlbum().getUser());

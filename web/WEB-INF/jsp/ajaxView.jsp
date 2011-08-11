@@ -5,7 +5,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <c:forEach var="message" items="${new_messages}" varStatus="loopStatus">
 	<tr class="${(loopStatus.index % 2 == 0) ? 'message_one' : 'message_two'}">
-		<td class="message_date" >
+		<td class="message_date new_message" >
 			<%--
 						<fmt:formatDate value="${message.date}" pattern="dd-MM-yyyy HH:mm:ss" />
 						--%>

@@ -20,21 +20,35 @@ import java.util.List;
 public class IndexService {
 
 	public void addMessage(Long userId, String text) {
-		Message message = new Message();
-		User user = new User();
-		user.setId(userId);
-		message.setUser(user);
-		message.setText(text);
-		message.setDate(new Date());
+		UserHelper userHelper = new UserHelper();
+		User messageUser = userHelper.getUserById(userId);
 		MessageHelper messageHelper = new MessageHelper();
-		messageHelper.addMessage(message);
+		String lastUserMessage = messageHelper.getLastUserMessage(messageUser);
+		if (!text.equals(lastUserMessage)) {
+			Message message = new Message();
+			User user = new User();
+			user.setId(userId);
+			message.setUser(user);
+			message.setText(text);
+			message.setDate(new Date());
+			messageHelper.addMessage(message);
+		}
 		return;
 	}
 
 	public int getLastMessageId() {
 		MessageHelper messageHelper = new MessageHelper();
 		int lastMessageId = messageHelper.getLastMessageId();
-		return lastMessageId;	
+		return lastMessageId;
+	}
+
+	public Long getLastReadedMessageId(Long userId) {
+		MessageHelper messageHelper = new MessageHelper();
+		UserHelper userHelper = new UserHelper();
+		User user = userHelper.getUserById(userId);
+		Long lastMessageId =
+						messageHelper.getLastReadedMessageId(user.getShownDate());
+		return lastMessageId;
 	}
 
 	public List<Message> messageList(Long userId) {

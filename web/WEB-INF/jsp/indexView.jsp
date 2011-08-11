@@ -17,7 +17,7 @@
 	<body>
 		<p>Последние сообщения</p>
 		${session_content}
-		<form action="" method="post">
+		<form action="<c:url value="/index.htm" />" method="post">
 			Сообщение:<br />
 			<textarea  name="text" rows="5" cols="60"></textarea>
 			<br />
@@ -29,7 +29,7 @@
 		<table id="messages" class="table_of_messages">
 			<c:forEach var="message" items="${new_messages}" varStatus="loopStatus">
 				<tr class="${(loopStatus.index % 2 == 0) ? 'message_one' : 'message_two'}">
-					<td class="message_date" >
+					<td class="message_date${(message.id > last_readed_message_id) ? ' new_message' : ''}">
 						<%--
 						<fmt:formatDate value="${message.date}" pattern="dd-MM-yyyy HH:mm:ss" />
 						--%>
