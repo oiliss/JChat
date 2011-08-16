@@ -17,6 +17,7 @@
 		<intercept-url pattern="/login.htm" access="IS_AUTHENTICATED_ANONYMOUSLY" />		
 		<intercept-url pattern="/register.htm" access="IS_AUTHENTICATED_ANONYMOUSLY" />		
 		<intercept-url pattern="/welcome.htm" access="IS_AUTHENTICATED_ANONYMOUSLY" />		
+		<intercept-url pattern="/client.htm" access="IS_AUTHENTICATED_ANONYMOUSLY" />		
 		<intercept-url pattern="/*.htm" access="ROLE_USER" />
 		<intercept-url pattern="/**" access="IS_AUTHENTICATED_ANONYMOUSLY" />		
 		

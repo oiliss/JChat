@@ -252,6 +252,28 @@ public class MessageHelper {
 		return messageList;
 	}
 
+	public List<Message> getForClientMessageListNewerThenId(Long lastMessageId) {
+		checkSession();
+		org.hibernate.Transaction tx = null;
+		List<Message> messageList = null;
+		try {
+			tx = session.beginTransaction();
+			messageList = (List<Message>) session.createCriteria(Message.class).
+							add(Expression.gt("id", lastMessageId)).
+							list();
+			for (Message message : messageList) {
+				Hibernate.initialize(message.getUser());
+			}
+			tx.commit();
+		} catch (Exception e) {
+			if (tx != null) {
+				tx.rollback();
+			}
+			System.err.println(javaoinlibrary.ErrUtils.getStack(new Throwable(), e));
+		}
+		return messageList;
+	}
+
 	public void addMessage(Message message) {
 		checkSession();
 		org.hibernate.Transaction tx = null;

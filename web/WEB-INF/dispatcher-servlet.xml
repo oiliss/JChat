@@ -56,4 +56,6 @@
 
 	<bean class="controller.AjaxController" p:ajaxService-ref="ajaxService" />
 
+	<bean class="controller.ClientController" p:clientService-ref="clientService" />
+
 </beans>

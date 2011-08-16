@@ -28,6 +28,11 @@ public class SessionService {
 		session.setAttribute(name, value);
 	}
 
+	public static void remove(HttpServletRequest hsr, String name) {
+		HttpSession session = hsr.getSession();
+		session.removeAttribute(name);
+	}
+
 	public static String get(HttpServletRequest hsr, String name) {
 		String s;
 		HttpSession session = hsr.getSession();

@@ -30,7 +30,9 @@ public class AjaxController extends AbstractController {
 		Long userId = SessionService.getSessionUserId(hsr);
 		String strLastMessageId = SessionService.get(hsr, "lastMessageId");
 		if (strLastMessageId != null) {
+			System.out.println("Ajax strLastMessageId = " + strLastMessageId);
 			lastMessageId = Long.parseLong(strLastMessageId);
+			System.out.println("Ajax lastMessageId = " + lastMessageId);
 		}
 		SessionService.set(hsr, "lastMessageId", "" + ajaxService.getLastMessageId());
 		mv.addObject("new_messages", ajaxService.newMessageList(userId, lastMessageId));

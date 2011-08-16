@@ -41,6 +41,8 @@
 
 	<bean name="ajaxService" class="service.AjaxService" />
 
+	<bean name="clientService" class="service.ClientService" />
+
 	<bean name="chatUserDetailsService" class="spring_security.ChatUserDetailsService" />
 
 </beans>
