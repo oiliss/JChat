@@ -17,13 +17,13 @@
 	<body>
 		<p>Последние сообщения</p>
 		${session_content}
-		<form action="<c:url value="/index.htm" />" method="post">
+		<form id="textFormId" action="<c:url value="/index.htm" />" method="post">
 			Сообщение:<br />
-			<textarea  name="text" rows="5" cols="60"></textarea>
+			<textarea id="textId" name="text" rows="5" cols="60"></textarea>
 			<br />
-			<input type="submit" value="OK" />
+			<input type="submit" value="OK" /> или Ctrl + Enter
 		</form>
-		
+
 		<a href="<c:url value="/index.htm?allMessagesReaded=allMessagesReaded" />">Все сообщения прочитаны</a>
 
 		<table id="messages" class="table_of_messages">
@@ -68,13 +68,20 @@
 						//$("#log").append(".");
 						//$("#log").append(html);
 						//if (!html.empty()) {
-							$("#messages").prepend(html);
+						$("#messages").prepend(html);
 						//}
 					}
 				});
 			}
 
 			$(document).ready(function(){
+
+				$('#textId').keydown(function (e) {
+					if (e.ctrlKey && e.keyCode == 13) {						
+						document.forms["textFormId"].submit();
+					}
+				});
+
 				getNewMessages();
 				setInterval('getNewMessages()',5000);
 			});
