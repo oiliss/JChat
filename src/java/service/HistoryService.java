@@ -36,6 +36,13 @@ public class HistoryService {
 		List<Message> messages =
 						messageHelper.getMessagePageDesc(
 						(pageNum - 1) * messagesOnPage, messagesOnPage);
+		if (messages != null) {
+			if (messages.size() > 0) {
+				for (Message message : messages) {
+					message.setText(message.getText().replaceAll("\n", "<br>"));
+				}
+			}
+		}
 		return messages;
 	}
 

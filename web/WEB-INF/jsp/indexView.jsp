@@ -19,7 +19,7 @@
 		${session_content}
 		<form id="textFormId" action="<c:url value="/index.htm" />" method="post">
 			Сообщение:<br />
-			<textarea id="textId" name="text" rows="5" cols="60"></textarea>
+			<textarea id="textId" name="text" rows="5" cols="30"></textarea>
 			<br />
 			<input type="submit" value="OK" /> или Ctrl + Enter
 		</form>

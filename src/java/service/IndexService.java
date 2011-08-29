@@ -73,6 +73,7 @@ public class IndexService {
 			if (messages.size() > 0) {
 				for (Message message : messages) {
 					shownDate = message.getDate();
+					message.setText(message.getText().replaceAll("\n", "<br>"));
 				}
 			} else {
 				shownDate = new Date();
