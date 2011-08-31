@@ -39,6 +39,7 @@ public class IndexController extends AbstractController {
 			if (strLastMessageId != null) {
 				Long lastMessageId = Long.parseLong(strLastMessageId);
 				indexService.changeShownDate(userId, lastMessageId);
+				return new ModelAndView("redirect:index.htm");
 			}
 		}
 		SessionService.set(hsr, "lastMessageId", "" + indexService.getLastMessageId());
@@ -49,6 +50,7 @@ public class IndexController extends AbstractController {
 		mv.addObject("new_messages",
 						indexService.messageList(SessionService.getSessionUserId(hsr)));
 		//mv.addObject("message", new controller.entity.Mess());
+
 		return mv;
 	}
 }
